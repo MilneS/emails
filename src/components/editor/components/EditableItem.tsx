@@ -1,4 +1,5 @@
-import { Card, CardContent, TextField, Typography } from "@mui/material";
+import { Box, Card, CardContent, TextField, Typography } from "@mui/material";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 
 const EditableItem = ({
   itemName,
@@ -7,9 +8,19 @@ const EditableItem = ({
   itemName: String;
   itemMaxChar: number;
 }) => {
+  const cardStyle = {
+    border: "0px",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    position: "relative",
+  };
+
   return (
-    <Card variant="outlined" sx={{ px: 2, border: "0px" }}>
-      <CardContent>
+    <Card variant="outlined"
+     sx={cardStyle}>
+      <Box width="3rem" />
+      <CardContent sx={{ width: "100%", px: 0 }}>
         {/* @ts-ignore */}
         <Typography variant="h6" pb={1}>
           {itemName}
@@ -23,6 +34,19 @@ const EditableItem = ({
           sx={{ backgroundColor: "#ffffff" }}
         />
       </CardContent>
+      <Box
+        width="3rem"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <DragIndicatorIcon
+          sx={{
+            "&:hover": { cursor: "grab" },
+            color: "#b5b5b5",
+          }}
+        />
+      </Box>
     </Card>
   );
 };
