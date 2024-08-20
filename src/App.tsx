@@ -1,4 +1,3 @@
-import React from "react";
 import Editor from "./components/editor";
 import Preview from "./components/preview";
 import { Box, Divider } from "@mui/material";

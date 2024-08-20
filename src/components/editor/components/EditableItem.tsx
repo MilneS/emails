@@ -1,13 +1,11 @@
 import { Box, Card, CardContent, TextField, Typography } from "@mui/material";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-const EditableItem = ({
-  itemName,
-  itemMaxChar,
-}: {
-  itemName: String;
-  itemMaxChar: number;
-}) => {
+const EditableItem = (props: any) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: props.id });
   const cardStyle = {
     border: "0px",
     display: "flex",
@@ -15,21 +13,28 @@ const EditableItem = ({
     alignItems: "center",
     position: "relative",
   };
+  const style = { transform: CSS.Transform.toString(transform), transition };
 
   return (
-    <Card variant="outlined"
-     sx={cardStyle}>
+    <Card
+      variant="outlined"
+      sx={cardStyle}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+    >
       <Box width="3rem" />
       <CardContent sx={{ width: "100%", px: 0 }}>
         {/* @ts-ignore */}
         <Typography variant="h6" pb={1}>
-          {itemName}
+          {props.item.name}
         </Typography>
         <TextField
           // error
-          helperText={`${itemMaxChar} characters max`}
+          helperText={`${props.item.maxChar} characters max`}
           id="outlined-basic"
-          label={`Type your ${itemName} here`}
+          label={`Type your ${props.item.name} here`}
           fullWidth
           sx={{ backgroundColor: "#ffffff" }}
         />
