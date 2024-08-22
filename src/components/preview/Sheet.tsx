@@ -14,7 +14,7 @@ const Sheet = () => {
       }}
     >
       {firstTemplate.comps.map((item) => {
-        return <PreviewItem itemName={item.name} itemVariant={item.el} />;
+        return <PreviewItem key={item.id} itemName={item.name} itemVariant={item.el} />;
       })}
     </Box>
   );

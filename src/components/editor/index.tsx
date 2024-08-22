@@ -20,6 +20,7 @@ import SectionTitle from "../common/SectionTitle";
 
 export default function Editor() {
   const [items, setItems] = useState<string[]>([]);
+  const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -42,17 +43,32 @@ export default function Editor() {
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           {items.map((id) => {
             const item = firstTemplate.comps.find((itm) => itm.id === id);
-            return <>{item && <EditableItem key={id} id={id} item={item} />}</>;
+            return (
+              <Box key={id}>
+                {item && (
+                  <EditableItem
+                    key={id}
+                    id={id}
+                    item={item}
+                    isGrabbed={id === draggedItemId}
+                  />
+                )}
+              </Box>
+            );
           })}
         </SortableContext>
       </DndContext>
     </Box>
   );
 
+  function handleDragStart(event: any) {
+    setDraggedItemId(event.active.id);
+  }
   function handleDragEnd(event: any) {
     const { active, over } = event;
 
@@ -64,5 +80,6 @@ export default function Editor() {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
+    setDraggedItemId(null);
   }
 }

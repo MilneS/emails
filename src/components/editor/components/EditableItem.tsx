@@ -7,11 +7,12 @@ const EditableItem = (props: any) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: props.id });
   const cardStyle = {
-    border: "0px",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     position: "relative",
+    border: props.isGrabbed ? "1px solid #b5b5b5" : "0px",
+    zIndex: props.isGrabbed ? "6" : "5",
   };
   const style = { transform: CSS.Transform.toString(transform), transition };
 
