@@ -46,14 +46,23 @@ export default function Editor() {
         onDragStart={handleDragStart}
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
-          {items.map((id) => {
+          {items.map((id, i) => {
             const item = firstTemplate.comps.find((itm) => itm.id === id);
             return (
-              <Box key={id}>
+              <Box
+                key={id}
+                sx={{
+                  border: "1px solid #b5b5b5",
+                  borderBottom:
+                    i === firstTemplate.comps.length - 1
+                      ? "1px solid #b5b5b5"
+                      : "0px",
+                }}
+              >
                 {item && (
                   <EditableItem
                     key={id}
-                    id={id}
+                    itemId={id}
                     item={item}
                     isGrabbed={id === draggedItemId}
                   />
