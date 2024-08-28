@@ -1,8 +1,15 @@
 import { Box } from "@mui/material";
 import PreviewItem from "./components/PreviewItem";
 import { firstTemplate } from "../../utils";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Sheet = () => {
+  const cardsOrder = useSelector((state: any) => state.cardsReducer.cardsOrder);
+  useEffect(() => {
+    console.log(cardsOrder);
+  }, [cardsOrder]);
+
   return (
     <Box
       sx={{
@@ -14,7 +21,13 @@ const Sheet = () => {
       }}
     >
       {firstTemplate.comps.map((item) => {
-        return <PreviewItem key={item.id} itemName={item.name} itemVariant={item.el} />;
+        return (
+          <PreviewItem
+            key={item.id}
+            itemName={item.name}
+            itemVariant={item.el}
+          />
+        );
       })}
     </Box>
   );
