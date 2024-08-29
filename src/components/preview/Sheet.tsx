@@ -19,11 +19,11 @@ const Sheet = () => {
         padding: "3rem",
       }}
     >
-      {cardsOrder.map((item: Card) => {
+      {cardsOrder.map((item: Card, i:number) => {
         const inputValue = cardsInputs.find(
           (inp: { id: string; value: string }) => inp.id === item.id
         ).value;
-        return <PreviewItem key={item.id} item={item} inputValue={inputValue}/>;
+        return <PreviewItem key={item.id} item={item} inputValue={inputValue} isLast={i===cardsOrder.length-1}/>;
       })}
     </Box>
   );
