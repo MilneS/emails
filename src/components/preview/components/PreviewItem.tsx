@@ -1,13 +1,7 @@
 import { Box, Typography } from "@mui/material";
+import { Card } from "../../../app/interface/interface.model";
 
-const PreviewItem = ({
-  itemName,
-  itemVariant,
-}: {
-  itemName: String;
-  itemVariant: String;
-}) => {
-  const isPopulated = false;
+const PreviewItem = ({ item }: { item: Card }) => {
   return (
     <Box
       sx={{
@@ -17,9 +11,7 @@ const PreviewItem = ({
       }}
     >
       {/* @ts-ignore */}
-      <Typography variant={itemVariant}>
-        {isPopulated ? null : itemName}
-      </Typography>
+      <Typography variant={item.el}>{item.name}</Typography>
     </Box>
   );
 };

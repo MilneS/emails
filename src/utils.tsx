@@ -1,4 +1,6 @@
-export const firstTemplate = {
+import { Template } from "./app/interface/interface.model";
+
+export const firstTemplate: Template = {
   isReorderable: true,
   comps: [
     { name: "Headline", el: "h4", maxChar: 10, id: "Headline" },
