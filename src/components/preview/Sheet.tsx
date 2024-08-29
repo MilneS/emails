@@ -1,15 +1,13 @@
 import { Box } from "@mui/material";
 import PreviewItem from "./components/PreviewItem";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Card } from "../../app/interface/interface.model";
 
 const Sheet = () => {
   const cardsOrder = useSelector((state: any) => state.cardsReducer.cardsOrder);
-  const cardsInputs = useSelector((state: any) => state.cardsReducer.cardsInputs);
-  useEffect(() => {
-    console.log(cardsInputs);
-  }, [cardsInputs]);
+  const cardsInputs = useSelector(
+    (state: any) => state.cardsReducer.cardsInputs
+  );
 
   return (
     <Box
@@ -22,7 +20,10 @@ const Sheet = () => {
       }}
     >
       {cardsOrder.map((item: Card) => {
-        return <PreviewItem key={item.id} item={item} />;
+        const inputValue = cardsInputs.find(
+          (inp: { id: string; value: string }) => inp.id === item.id
+        ).value;
+        return <PreviewItem key={item.id} item={item} inputValue={inputValue}/>;
       })}
     </Box>
   );

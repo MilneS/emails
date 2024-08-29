@@ -1,7 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import { Card } from "../../../app/interface/interface.model";
 
-const PreviewItem = ({ item }: { item: Card }) => {
+const PreviewItem = ({
+  item,
+  inputValue,
+}: {
+  item: Card;
+  inputValue: string;
+}) => {
   return (
     <Box
       sx={{
@@ -11,7 +17,9 @@ const PreviewItem = ({ item }: { item: Card }) => {
       }}
     >
       {/* @ts-ignore */}
-      <Typography variant={item.el}>{item.name}</Typography>
+      <Typography variant={item.el}>
+        {inputValue.length > 0 ? inputValue : item.name}
+      </Typography>
     </Box>
   );
 };
