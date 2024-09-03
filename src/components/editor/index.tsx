@@ -13,6 +13,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { firstTemplate } from "../../utils";
 import EditableItem from "../editor/components/EditableItem";
 import { Box } from "@mui/material";
@@ -26,6 +27,7 @@ export default function Editor() {
   const [items, setItems] = useState<string[]>([]);
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const dispatch = useDispatch();
+
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -63,20 +65,18 @@ export default function Editor() {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
         onDragStart={handleDragStart}
+        modifiers={[restrictToVerticalAxis]}
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           <Box overflow="scroll" height="calc( 100% - 4rem )">
-            {items.map((id, i) => {
+            {items.map((id) => {
               const item = selectedTemplate.comps.find((itm) => itm.id === id);
               return (
                 <Box
                   key={id}
                   sx={{
-                    border: "1px solid #b5b5b5",
-                    borderBottom:
-                      i === selectedTemplate.comps.length - 1
-                        ? "1px solid #b5b5b5"
-                        : "0px",
+                    borderTop: "1px solid #b5b5b5",
+                    backgroundColor: "#b5b5b5",
                   }}
                 >
                   {item && (
