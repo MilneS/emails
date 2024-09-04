@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCardsInputs } from "../../../app/cardsSlice";
 import { Inpt } from "../../../app/interface/interface.model";
 import { useState } from "react";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const EditableItem = (props: any) => {
   const [itemVal, setItemVal] = useState("");
@@ -21,9 +22,14 @@ const EditableItem = (props: any) => {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    position: "relative",
     border: isGrabbed ? "1px solid #b5b5b5" : "0px",
     zIndex: isGrabbed ? "6" : "5",
+  };
+  const TopBoxStyle = {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   };
   const style = { transform: CSS.Transform.toString(transform), transition };
 
@@ -50,9 +56,14 @@ const EditableItem = (props: any) => {
       <Box width="3rem" />
       <CardContent sx={{ width: "100%", px: 0 }}>
         {/* @ts-ignore */}
-        <Typography variant="h6" pb={1}>
-          {item.name}
-        </Typography>
+        <Box sx={TopBoxStyle} pb={1}>
+          <Typography variant="h6">{item.name}</Typography>
+          <DeleteOutlineIcon
+            color="warning"
+            fontSize="medium"
+            sx={{ "&:hover": { cursor: "pointer" } }}
+          />
+        </Box>
         <TextField
           // error
           helperText={`${props.item.maxChar} characters max`}

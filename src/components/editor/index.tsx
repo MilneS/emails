@@ -69,13 +69,15 @@ export default function Editor() {
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           <Box overflow="scroll" height="calc( 100% - 4rem )">
-            {items.map((id) => {
+            {items.map((id, i) => {
               const item = selectedTemplate.comps.find((itm) => itm.id === id);
               return (
                 <Box
                   key={id}
                   sx={{
                     borderTop: "1px solid #b5b5b5",
+                    borderBottom:
+                      i === items.length - 1 ? "1px solid #b5b5b5" : "0px",
                     backgroundColor: "#b5b5b5",
                   }}
                 >
