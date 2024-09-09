@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCardsInputs } from "../../../app/cardsSlice";
 import { Inpt } from "../../../app/interface/interface.model";
 import { useState } from "react";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import DeleteCardModal from "./DeleteCardModal";
 
 const EditableItem = (props: any) => {
   const [itemVal, setItemVal] = useState("");
@@ -58,11 +58,7 @@ const EditableItem = (props: any) => {
         {/* @ts-ignore */}
         <Box sx={TopBoxStyle} pb={1}>
           <Typography variant="h6">{item.name}</Typography>
-          <DeleteOutlineIcon
-            color="warning"
-            fontSize="medium"
-            sx={{ "&:hover": { cursor: "pointer" } }}
-          />
+          <DeleteCardModal itemId={item.id}/>
         </Box>
         <TextField
           // error
