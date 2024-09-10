@@ -13,7 +13,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
 import { firstTemplate } from "../../../utils";
 import EditableItem from "./EditableItem";
 import { Box } from "@mui/material";
@@ -62,7 +62,7 @@ export default function SortableCont() {
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
-      modifiers={[restrictToVerticalAxis]}
+      modifiers={[restrictToFirstScrollableAncestor]}
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
         <Box overflow="scroll" height="calc( 100% - 4rem )">
