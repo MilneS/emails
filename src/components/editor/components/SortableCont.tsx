@@ -14,15 +14,17 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
-import { firstTemplate } from "../../../utils";
 import EditableItem from "./EditableItem";
 import { Box } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCardsInputs, setCardsOrder } from "../../../app/cardsSlice";
-import { Card, Inpt } from "../../../app/interface/interface.model";
+import { Card, Inpt, Template } from "../../../app/interface/interface.model";
 
 export default function SortableCont() {
-  const selectedTemplate = firstTemplate;
+  const selectedTemplate: Template = useSelector(
+    (state: any) => state.cardsReducer.selectedTemplate
+  );
+
   const [items, setItems] = useState<string[]>([]);
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const dispatch = useDispatch();

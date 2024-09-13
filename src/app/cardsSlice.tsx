@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Card, Inpt } from "./interface/interface.model";
+import { Card, Inpt, Template } from "./interface/interface.model";
 
 const initialState: {
+  selectedTemplate: Template | {};
   cardsOrder: Card[];
   cardsInputs: Inpt[];
 } = {
+  selectedTemplate: {},
   cardsOrder: [],
   cardsInputs: [],
 };
@@ -13,6 +15,9 @@ export const cardsSlice = createSlice({
   name: "cards",
   initialState,
   reducers: {
+    setSelectedTemplate: (state, action) => {
+      state.selectedTemplate = action.payload;
+    },
     setCardsOrder: (state, action) => {
       state.cardsOrder = action.payload;
     },
@@ -22,6 +27,6 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { setCardsOrder, setCardsInputs } = cardsSlice.actions;
+export const { setCardsOrder, setCardsInputs, setSelectedTemplate } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
