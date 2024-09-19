@@ -4,6 +4,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedTemplate } from "../../../app/cardsSlice";
+import { Template } from "../../../app/interface/interface.model";
 
 const style = {
   position: "absolute" as "absolute",
@@ -14,16 +17,33 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
-  display:'flex',
-  alignItems:'center',
-  justifyContent:'center',
-  flexDirection:'column'
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
 };
 
 const DeleteCardModal = ({ itemId }: { itemId: string }) => {
   const [open, setOpen] = React.useState(false);
+  const selectedTemplate: Template = useSelector(
+    (state: any) => state.cardsReducer.selectedTemplate
+  );
+  const dispatch = useDispatch();
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const deleteCard = () => {
+    const localTemplate: Template = JSON.parse(
+      JSON.stringify(selectedTemplate)
+    );
+    const found = localTemplate.comps.find((card) => card.id === itemId);
+    if (found) {
+      const idx = localTemplate.comps.indexOf(found);
+      localTemplate.comps.splice(idx, 1);
+    }
+    dispatch(setSelectedTemplate(localTemplate));
+  };
 
   return (
     <div>
@@ -51,7 +71,7 @@ const DeleteCardModal = ({ itemId }: { itemId: string }) => {
             >
               Cancel
             </Button>
-            <Button color="error" variant="contained">
+            <Button color="error" variant="contained" onClick={deleteCard}>
               Delete
             </Button>
           </Box>
