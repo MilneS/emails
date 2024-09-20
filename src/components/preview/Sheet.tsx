@@ -34,7 +34,6 @@ const Sheet = () => {
             key={item.id}
             item={item}
             inputValue={inputValue}
-            isLast={i === cardsOrder.length - 1}
           />
         ) : null;
       })}

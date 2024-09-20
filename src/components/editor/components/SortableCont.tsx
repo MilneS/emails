@@ -73,12 +73,7 @@ export default function SortableCont() {
             return (
               <Box
                 key={id}
-                sx={{
-                  borderTop: "1px solid #b5b5b5",
-                  borderBottom:
-                    i === items.length - 1 ? "1px solid #b5b5b5" : "0px",
-                  backgroundColor: "#b5b5b5",
-                }}
+                py='0.1rem'
               >
                 {item && (
                   <EditableItem

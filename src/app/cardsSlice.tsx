@@ -5,10 +5,12 @@ const initialState: {
   selectedTemplate: Template | {};
   cardsOrder: Card[];
   cardsInputs: Inpt[];
+  selectedCard: string | null;
 } = {
   selectedTemplate: {},
   cardsOrder: [],
   cardsInputs: [],
+  selectedCard: null,
 };
 
 export const cardsSlice = createSlice({
@@ -24,9 +26,17 @@ export const cardsSlice = createSlice({
     setCardsInputs: (state, action) => {
       state.cardsInputs = action.payload;
     },
+    setSelectedCard: (state, action) => {
+      state.selectedCard = action.payload;
+    },
   },
 });
 
-export const { setCardsOrder, setCardsInputs, setSelectedTemplate } = cardsSlice.actions;
+export const {
+  setCardsOrder,
+  setCardsInputs,
+  setSelectedTemplate,
+  setSelectedCard,
+} = cardsSlice.actions;
 
 export default cardsSlice.reducer;

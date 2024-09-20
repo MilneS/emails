@@ -3,7 +3,7 @@ import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useDispatch, useSelector } from "react-redux";
-import { setCardsInputs } from "../../../app/cardsSlice";
+import { setCardsInputs, setSelectedCard } from "../../../app/cardsSlice";
 import { Inpt } from "../../../app/interface/interface.model";
 import { useState } from "react";
 import DeleteCardModal from "./DeleteCardModal";
@@ -36,6 +36,7 @@ const EditableItem = (props: any) => {
   const inputHandler = (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>
   ) => {
+    dispatch(setSelectedCard(null));
     const cardsInputsCopy = JSON.parse(JSON.stringify(cardsInputs));
     cardsInputsCopy.forEach((inp: Inpt) => {
       if (e.target.id === inp.id) {
@@ -58,7 +59,7 @@ const EditableItem = (props: any) => {
         {/* @ts-ignore */}
         <Box sx={TopBoxStyle} pb={1}>
           <Typography variant="h6">{item.name}</Typography>
-          <DeleteCardModal itemId={item.id}/>
+          <DeleteCardModal itemId={item.id} />
         </Box>
         <TextField
           // error
@@ -70,6 +71,7 @@ const EditableItem = (props: any) => {
           onBlur={inputHandler}
           onChange={(e) => setItemVal(e.target.value)}
           value={itemVal}
+          onFocus={() => dispatch(setSelectedCard(itemId))}
         />
       </CardContent>
       <Box

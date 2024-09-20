@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedTemplate } from "../../../app/cardsSlice";
+import { setSelectedCard, setSelectedTemplate } from "../../../app/cardsSlice";
 import { Template } from "../../../app/interface/interface.model";
 
 const style = {
@@ -30,8 +30,15 @@ const DeleteCardModal = ({ itemId }: { itemId: string }) => {
   );
   const dispatch = useDispatch();
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setOpen(true);
+    dispatch(setSelectedCard(itemId));
+  };
+  
+  const handleClose = () => {
+    dispatch(setSelectedCard(null));
+    setOpen(false);
+  };
 
   const deleteCard = () => {
     const localTemplate: Template = JSON.parse(
@@ -43,6 +50,7 @@ const DeleteCardModal = ({ itemId }: { itemId: string }) => {
       localTemplate.comps.splice(idx, 1);
     }
     dispatch(setSelectedTemplate(localTemplate));
+    handleClose();
   };
 
   return (
