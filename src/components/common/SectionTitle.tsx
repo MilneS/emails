@@ -1,4 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Save } from "@mui/icons-material";
+import { Box, IconButton, Typography } from "@mui/material";
+import SaveModal from "../editor/components/SaveModal";
 
 const SectionTitle = ({ sectionName }: { sectionName: string }) => {
   return (
@@ -9,11 +11,13 @@ const SectionTitle = ({ sectionName }: { sectionName: string }) => {
         px: 3,
         display: "flex",
         alignItems: "center",
+        justifyContent: "space-between",
       }}
     >
       <Typography variant="h5" color="#303030">
         {sectionName}
       </Typography>
+      {sectionName === "Editor" && <SaveModal />}
     </Box>
   );
 };

@@ -3,11 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCard, setSelectedTemplate } from "../../../app/cardsSlice";
-import { Template } from "../../../app/interface/interface.model";
 import { IconButton } from "@mui/material";
+import { Save } from "@mui/icons-material";
 
 const style = {
   position: "absolute" as "absolute",
@@ -24,40 +21,26 @@ const style = {
   flexDirection: "column",
 };
 
-const DeleteCardModal = ({ itemId }: { itemId: string }) => {
+const SaveModal = () => {
   const [open, setOpen] = React.useState(false);
-  const selectedTemplate: Template = useSelector(
-    (state: any) => state.cardsReducer.selectedTemplate
-  );
-  const dispatch = useDispatch();
 
   const handleOpen = () => {
     setOpen(true);
-    dispatch(setSelectedCard(itemId));
   };
 
   const handleClose = () => {
-    dispatch(setSelectedCard(null));
     setOpen(false);
   };
 
-  const deleteCard = () => {
-    const localTemplate: Template = JSON.parse(
-      JSON.stringify(selectedTemplate)
-    );
-    const found = localTemplate.comps.find((card) => card.id === itemId);
-    if (found) {
-      const idx = localTemplate.comps.indexOf(found);
-      localTemplate.comps.splice(idx, 1);
-    }
-    dispatch(setSelectedTemplate(localTemplate));
+  const save = () => {
+    //save
     handleClose();
   };
 
   return (
     <div>
-      <IconButton color="primary" aria-label="delete" onClick={handleOpen}>
-        <DeleteOutlineIcon color="warning" fontSize="medium" />
+      <IconButton color="primary" aria-label="save" onClick={handleOpen}>
+        <Save fontSize="large" />
       </IconButton>
 
       <Modal
@@ -68,7 +51,7 @@ const DeleteCardModal = ({ itemId }: { itemId: string }) => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Delete {itemId}?
+            Save your changes?
           </Typography>
           <Box mt={3} mb={1}>
             <Button
@@ -78,8 +61,8 @@ const DeleteCardModal = ({ itemId }: { itemId: string }) => {
             >
               Cancel
             </Button>
-            <Button color="error" variant="contained" onClick={deleteCard}>
-              Delete
+            <Button color="error" variant="contained" onClick={save}>
+              Confirm
             </Button>
           </Box>
         </Box>
@@ -87,4 +70,4 @@ const DeleteCardModal = ({ itemId }: { itemId: string }) => {
     </div>
   );
 };
-export default DeleteCardModal;
+export default SaveModal;
