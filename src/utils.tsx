@@ -1,4 +1,4 @@
-import { Template } from "./app/interface/interface.model";
+import { Template } from "./appStore/interface/interface.model";
 
 export const firstTemplate: Template = {
   isReorderable: true,

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { Card } from "../../../app/interface/interface.model";
+import { Card } from "../../../appStore/interface/interface.model";
 import { useSelector } from "react-redux";
 
 const PreviewItem = ({

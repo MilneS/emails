@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import PreviewItem from "./components/PreviewItem";
 import { useSelector } from "react-redux";
-import { Card, Template } from "../../app/interface/interface.model";
+import { Card, Template } from "../../appStore/interface/interface.model";
 
 const Sheet = () => {
   const cardsOrder = useSelector((state: any) => state.cardsReducer.cardsOrder);

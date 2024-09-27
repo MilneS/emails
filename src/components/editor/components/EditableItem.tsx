@@ -3,8 +3,8 @@ import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useDispatch, useSelector } from "react-redux";
-import { setCardsInputs, setSelectedCard } from "../../../app/cardsSlice";
-import { Inpt } from "../../../app/interface/interface.model";
+import { setCardsInputs, setSelectedCard } from "../../../appStore/cardsSlice";
+import { Inpt } from "../../../appStore/interface/interface.model";
 import { useState } from "react";
 import DeleteCardModal from "./DeleteCardModal";
 

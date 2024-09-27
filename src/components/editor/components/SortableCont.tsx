@@ -17,8 +17,8 @@ import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
 import EditableItem from "./EditableItem";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setCardsInputs, setCardsOrder } from "../../../app/cardsSlice";
-import { Card, Inpt, Template } from "../../../app/interface/interface.model";
+import { setCardsInputs, setCardsOrder } from "../../../appStore/cardsSlice";
+import { Card, Inpt, Template } from "../../../appStore/interface/interface.model";
 
 export default function SortableCont() {
   const selectedTemplate: Template = useSelector(

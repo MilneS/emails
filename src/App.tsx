@@ -1,11 +1,11 @@
 import { firstTemplate } from "./utils";
-import { setSelectedTemplate } from "./app/cardsSlice";
+import { setSelectedTemplate } from "./appStore/cardsSlice";
 import { useEffect } from "react";
 import Editor from "./components/editor";
 import Preview from "./components/preview";
 import { Box, Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Template } from "./app/interface/interface.model";
+import { Template } from "./appStore/interface/interface.model";
 
 function App() {
   const dispatch = useDispatch();
